@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html lang='pt-br'>
+    <head>
+        <title></title>
+        
+        <link rel='icon' href='src/pix/logo.svg' type='svg+xml'>
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cinzel+Decorative:wght@400;700;900&family=Open+Sans:wght@500;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tangerine:wght@400;700&display=swap');
+
+            *:not( h1,h2,h3,h4,h5,h6,p,menu,ul,ol,li,hr,pre,dd,blockquote,fieldset,legend ),
+            *:not( h1,h2,h3,h4,h5,h6,p,menu,ul,ol,li,hr,pre,dd,blockquote,fieldset,legend )::before,
+            *:not( h1,h2,h3,h4,h5,h6,p,menu,ul,ol,li,hr,pre,dd,blockquote,fieldset,legend )::after {
+                margin:0; padding:0; box-sizing:border-box;
+            }
+            
+            :root {
+                --dark0: #16181c;   --dark1: #1b1d22;
+                --dark2: #212329;   --dark3: #505257;
+
+                --light0: #ffffff;  --light1: #f5f5f5;
+
+                --pink: #905;   --amber: #ffab00;   --red: #ce3635;
+                --azul: #27f;   --green: #006400;   --blue: #149cbe;
+                --texto: #e9e6e3;
+
+                --green-dark: #8b6d19;  --green-light: #a17d1a; --green-bg: #fbf6e9;
+                --purple-dark: #603479;   --purple-light: #965bb9;  --purple-bg: #f4edf7;
+                --red-dark: #902726;    --red-light: #b83232;   --red-bg: #fceeee;
+                --blue-dark: #1c5b6e;   --blue-light: #267d97;  --blue-bg: #ebf6fb;
+
+                --appbar-height: 81px;
+                --appbar-filter-shadow: drop-shadow( #0009 0 0 5px );
+                --sidebar-width: 68px;
+            }
+            
+            navlink { cursor: pointer; }
+            navlink:hover { color: #27f; transition: .3s ease-in-out; }
+            
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            ::-webkit-scrollbar-track {
+                background: var( --pink );
+                border-radius: 5px;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: var( --dark0 );
+                border-radius: 5px;
+            }
+            
+            html {
+                line-height: 1.15;
+                -webkit-text-size-adjust: 100%;
+                
+                background-color: #1b1d22;
+                background-image:   linear-gradient(0deg, #00000000 24px, #212329 25px),
+                linear-gradient(90deg, #00000000 24px, #212329 25px);
+                background: #fff;
+                background-size: 25px 25px;}
+            body {
+                width: calc( 100% - var( --sidebar-width ) );
+                min-height: 100vh;
+                /* margin-left: var( --sidebar-width ); */
+                padding-top: 81px;
+                /* color: var( --texto ); */
+                font-family: 'Poppins';
+                -webkit-font-smoothing: antialiased;
+                
+                background: #fff;
+                position: absolute;
+                top: 71px; left: 0;
+                padding: 3rem 0 2rem;
+            }
+            body > main {
+                margin: 0 auto;
+                padding: 2.5rem;
+            }
+            body > main > article,
+            body > main > section {
+                width: 90%;
+                margin: 0 auto;
+                padding: 1rem;
+            }
+            t1, t2, t3, t4, t5, t6, t7 {
+                font-size: 3em;
+                font-weight: bold;
+                line-height: 1.2;
+                word-wrap: break-word;
+                color: #27f;
+            }
+            t { font-size: 1rem; }
+            t1 { font-size: 3rem; color: #e33; }
+            t2 { font-size: 2.5rem; color: #f29; }
+            t3 { font-size: 2.25rem; }
+            t4 { font-size: 1.8rem; }
+            t5 { font-size: 1.5rem; }
+            t6 { font-size: 1.25rem; }
+            t7 { font-size: 1.1rem; }
+            p { word-wrap: break-word; }
+            li { margin: 0.8ch 0; font-size: inherit; }
+            li > :nth-child( 1n ) {
+                padding-top: 1ch;
+                padding-bottom: 1ch;
+            }
+            li::marker {
+                /* unicode-bidi: isolate;
+                font-variant-numeric: tabular-nums;
+                font-variant-numeric: slashed-zero;
+                text-transform: none;
+                text-indent: 0px !important;
+                text-align: start !important;
+                text-align-last: start !important; */
+                font-size: larger;
+                font-weight: bolder;
+                color: #da0;
+            }
+            appbar {
+                /* display: block;
+                width: 100%;
+                height: 81px;
+                position: fixed;
+                top: 0; left: 0;
+                background: var( --dark0 );
+                filter: var( --appbar-filter-shadow ); */
+                z-index: 9;
+                
+                display: block;
+                width: 100%;
+                height: 98px;
+                position: fixed;
+                top: 0; left: 0;
+                background: #5099;
+                box-shadow: #509c 0 0 0 6px;
+                filter: drop-shadow( #0009 0 0 5px );
+                border-bottom-left-radius: 2rem;
+                border-bottom-right-radius: 2rem;
+                border-bottom: #29f 5px dashed;
+                border-left: #29f 5px dashed;
+                border-right: #29f 5px dashed;
+            }
+            appbar-body {
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                width: 99%;
+                height: 81px;
+                margin: 0 auto;
+                background: #27fc;
+                box-shadow: #27f 0 0 0 6px;
+                filter: drop-shadow( #0009 0 0 5px );
+                border-bottom-left-radius: 7ch;
+                border-bottom-right-radius: 7ch;
+                border-bottom: #29f 5px dashed;
+                border-left: #29f 5px dashed;
+                border-right: #29f 5px dashed;
+            }
+            appbar-body > t1 {
+                color: #59f;
+                display: grid;
+                place-items: center;
+            }
+            sidebar {
+                display: grid;
+                grid-template-columns: var( --sidebar-width ) 256px;
+                width: var( --sidebar-width );
+                height: calc( 100% - var( --appbar-height ) );
+                height: 100dvh;
+                margin-top: var( --appbar-height );
+                position: fixed;
+                top: 0; left: 0;
+                z-index: 6;
+                overflow-x: hidden;
+                background: var( --dark0 );
+            }
+            sidebar::-webkit-scrollbar { width: 0; }
+            sidebar-body {
+                display: grid;
+                grid-template-columns: repeat( 1, 60px );
+                grid-template-rows: repeat( auto-fill, 62px );
+                justify-content: center;
+                gap: 8px;
+                padding-top: 18px;
+            }
+            sidebar-header {
+                display: grid;
+                width: 100%;
+                height: 100%;
+            }
+            sidebar-body {
+                display: grid;
+                width: 100%;
+                height: 100%;
+            }
+            sidebar-options {
+                display: grid;
+                width: 100%;
+                height: 100%;
+            }
+            icon {
+                display: grid;
+                grid-template-columns: repeat( 1, 80% );
+                grid-template-rows: 80% 20%;
+                justify-content: center;
+                place-items: center;
+                gap: 2%;
+                padding: 4px;
+                border-radius: 0.5em;
+                cursor: pointer;
+                overflow: hidden;
+                transition: all .2s ease;
+            }
+            icon:has( icon-img ):hover {
+                background: #0005;
+                border-left: #27f 2px solid;
+                color: #ffab00;
+                transition: all .2s ease;
+            }
+            icon-img {
+                display: grid !important;
+                place-items: center;
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                border-radius: 5em;
+                background: #f5f5f510;
+            }
+            icon-name {
+                text-transform: capitalize;
+                font-size: x-small;
+            }
+            drawer {
+                display: block;
+                height: 100%;
+                background: var( --dark1 );
+            }
+            card {
+                display: grid;
+                width: clamp( 100px, 90%, 950px );
+                height: 100%;
+                margin: 0 auto;
+                padding: 2rem;
+                background: #2232;
+                box-shadow: #2233 0 0 0 13px;
+                filter: drop-shadow( #9052 0 0 6px );
+                border-radius: 1.5rem;
+                border: 6px dashed #f275;
+            }
+            card-body {
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding: 1.5em 2.5em;
+                background: #f5f5f5;
+            }
+            label {
+                display: grid;
+            }
+            label > :first-child {
+                font-size: 1.5rem;
+                margin: 1ch 0 .5ch;
+                font-variant: small;
+            }
+            label > input {
+                border-radius: 9px;
+                border: transparent;
+                padding: 0.5rem;
+                font-size: 1.1rem;
+                outline: transparent;
+                cursor: pointer;
+            }
+            label > input:focus-visible {
+            }
+            fieldset {
+                border-radius: 2rem;
+                margin: 1rem 0;
+                padding: 1rem;
+            }
+            legend { font-weight: bolder; }
+            hr {
+                width: 100%;
+                border: #da05 solid;
+                border-radius: 2rem;
+            }
+            button, input[type='button'] {
+                padding: 1rem 2rem;
+                border-radius: 0.5em;
+                border: none;
+                background: var( --azul );
+                box-shadow: var( --purple-light ) 0 2px 0 1px;
+                transform: translateY(-1px);
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+                color: #fff;
+                transition: .15s all ease;
+                cursor: pointer;
+            }
+            button:hover, input[type='button']:hover {
+                box-shadow: var( --purple-light ) 0 4px 0 1px;
+                transform: translateY(-3px);
+                transition: .15s all ease;
+            }
+            button:active, input[type='button']:active {
+                box-shadow: var( --purple-light ) 0 2px 0 1px;
+                transform: translateY(-1px);
+                transition: .15s all ease;
+            }
+            article > section {
+                margin: 0 auto;
+                padding: 24px;
+                background: var(--dark1);
+            }
+            article > section > header-links {
+                display: block;
+            }
+            article > section > home {
+                display: block;
+                margin: 20px 0 50px;
+            }
+            article > section > home > * {
+                padding: 20px 0;
+            }
+            post {
+                display: block;
+                flex: auto;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 90px 0;
+            }
+            post-body {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                position: relative;
+                border-radius: 6px;
+                background: #212329;
+            }
+            post-body > post-header {
+                display: block;
+                padding: 70px 95px;
+            }
+            post-body:has( post-header ) post-body {
+                padding-top: 0;
+            }
+
+            games {
+                display: grid;
+                /* grid-auto-flow: column; */
+                /* grid-template-columns: auto; */
+                gap: 1rem;
+                width: 90%;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            game {
+                display: grid;
+                border-radius: 1rem;
+                padding: 2rem;
+                background: #f5f5f5;
+                overflow: hidden;
+                width: clamp( 100px, 100%, 300px );
+                aspect-ratio: 1 / 1.5;
+            }
+
+            games > game > img {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <appbar>
+            <appbar-body>
+                <appbar-brand></appbar-brand>
+                <t1></t1>
+                <appbar-options></appbar-options>
+            </appbar-body>
+        </appbar>
+
+        <main>
+            <games>
+                <game link="https://psxstation.blogspot.com/2023/01/ps1-castlevania-symphony-of-night-cheat.html" pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMbvfcML8h3lhZb_qK4FMNWU57zMp0SbP285ZEuf6dvs0W0U7zbpJLzSF3kQBfquA2bEIUDgl5ll_tUuJivFywQn5bTCKVOmVRilVo-lBxNkffTl37xExc8Cr5BsmJ3wbVbHaKoDpZUdosDd0wd-VlcDIvg6zUnxdfEQpfbv2lAJ1QtPdU7LbQeODr/w400-h388/0_Castlevania%20-%20Symphony%20of%20the%20Night_dublado_traduzido_portugues_tradu%C3%A7%C3%A3o_br_pt-br_ptbr.jpg" text="[PS1] Castlevania Symphony of the Night - Cheat Edition (Dublado e Traduzido em português PT-BR)"></game>
+                <game link="https://psxstation.blogspot.com/2022/11/ps1-gekido-urban-fighters-pt-br.html" pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjo800JGUsW0lLtYFkQbUkb-KrgXc8Lf5tWJUee95UwzMsM8Aloi-c4pjtz5jef6v3leauJDi42cYrJR6qQapTbfFHKUcGQECc4aIoDuRQ6gZbRMTPX9CxxWN8mSByfkOS83SLk0vrwrj5NL-fUPQ0Cs5Kc8WQfZcGbnkfUHfuhC5_EZph_IZzCGH7n/w400-h376/Gekido%20-%20Urban%20Fighters%20(PT-BR)_dublado_nemesis_fandubs_traduzido_2.jpg" text="[PS1] Gekido - Urban Fighters (PT-BR) [Traduzido]"></game>
+                <game link="https://psxstation.blogspot.com/2023/01/ps1-toy-story-2-buzz-lightyear-to.html" pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAqjPHKpgUnpolGZUa5OJ9Dznac41oQC8TfNHlGcknep0F4TpYIO7oru_PVNZllZNXac1UAjbfUiprGcK8DjKVs-JE472Jxq-_zEER8KzSPgLjj9wzQftpUqgAjMT8dhQYvdatACAkxhBPw5e8KS2A1kT0WQzynltBgI5fko0WojbA8lTS8LxRCyr9/w400-h359/Cover_PS1_PSX_%20Toy%20Story%202%20Buzz%20Lightyear%20ao%20Resgate!_Disney-Pixar%20Toy%20Story%202%20-%20Buzz%20Lightyear%20to%20the%20rescue_dublado_traduzido_tradu%C3%A7%C3%A3o_pr-br_br_portugu%C3%AAs_ytpsd.jpg" text="[PS1] Toy Story 2 - Buzz Lightyear to the Rescue! (Dublado e Traduzido PT-BR)"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2023/01/ps2-god-hand-traduzido-em-portugues-pt.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMfVaHve_pAoPPTEyUvFOoCf-o-9_glp5lYENFfLYD2K0FH8yMZSDsYhxTlgEztan05kPG5F8U_l5LCAN33jEav0yAxR4LgSoNIjd5snyEhG23L0TWtIZRiNIsQzZerbQGc3gqzI-_fDXBRTk3xrfUotINOG3-6lcakNFkCKvashNprTmlvncg_yDi/s16000/PS2_God_Hand_PT-BR_portugu%C3%AAs_traduzido_tradu%C3%A7%C3%A3o_BR_brasileiro_2.jpg" 
+                    text="[PS2] God Hand (Traduzido em português PT-BR)"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2023/01/ps1-yu-gi-oh-forbidden-memories-cheat.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJtJ1ZMVjQAbjZ35fP-KJlHj27HLUpJJ9ZI3tmJwcGBjGlWqbadnICxJ3oBRbJ5C76F1bzkUc0Y5lOlcy8lUZuAofh5IduwyyZy0-0U9NHLCcJLMoi_MPotbFEDxv6HOcLjidHiiotjSl4omQ8ww7RsUo6j2Nwyy4vm3VSRKUAVl9W0zTjtOQ4DNiH/w400-h400/Capa_Yu-Gi-Oh!%20Forbidden%20Memories_Cheat_Edition_Trainer_ps1_psx_rom_iso_traduzido_tradu%C3%A7%C3%A3o_pt-br_ptbr_br_portugu%C3%AAs_legendado_dublado_todas_as_cartas_cheats_truque_trapa%C3%A7a_04.jpg" 
+                    text="[PS1] Yu-Gi-Oh! Forbidden Memories - Cheat Edition (Traduzido em português PT-BR)"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2023/03/ps1-syphon-filter-dublado-e-traduzido.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVy3TCpDI8rlgNAspAAOAy8gtxjGaGfgoIoEhMeFB2gh-W12ZH9RyPre-UXfAiE0g0tCeCtY5Oda9edIXQEnD3IuTORED_gUVzDb20sM-Mpfi64sfHEq_upe2IRpdDZM8T6ERcnhXlsRHCKRf0pcG7RK0f_J_BLerrA5uFkpJwxjGQp-VGopzD2BXg/w400-h364/capa_ps1_syphon_filter_PS1_dublado_traduzido_tradu%C3%A7%C3%A3o_portugu%C3%AAs_pt-br_nemesis_fandubs_opl_popstarter_yt.jpg" 
+                    text="[PS1] Syphon Filter (Dublado e Traduzido PT-BR)"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2023/04/ps1-treasure-planet-planeta-do-tesouro.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifdyl_7srXIa6CRTOEhEuPjHcDjt2MlvOL9EOh2ZnF0S95l5vc_nxncxntpDdX-7nPs_C69Jd59Z25gOVEtEqjSJ-ByGC8pymp_0gXj1U0S8pybx_h_P-YV0hQ0aF9dJG7rUkAsge6lDvJ5FC3GKFTCaYOWizqWqSoh3qTBRCvKxXEIYfkLJE6_1O3/w400-h375/PS1_Treasure%20Planet_Planeta%20do%20Tesouro_PT-BR_portugu%C3%AAs_traduzido_tradu%C3%A7%C3%A3o_BR_brasileiro_1.jpg" 
+                    text="[PS1] Treasure Planet / Planeta do Tesouro (Traduzido em português PT-BR)"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2023/05/ps2-echo-night-beyond-pt-br-dublado-e.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqZzqjFTTffmqhLeGqIH9b8SwSbAPIAgdQB2rGpcRQcZXy4MLqIEchuu9WRCE4l_BFVt2WxFUFMesc-zJ1ihRmUOKWUehGpRdKXOxPHvuIt89yDJwX833HQ0hxbgiaStR9pFTiN-j75PA5lNMgbFjq95ADlt9y8x_Do36Uu9gg0nHig4l1zuS6Xicn/w640-h360/Echo%20Night%20-%20Beyond_SLUS-20928_20230501110813.jpg" 
+                    text="[PS2] Echo Night - Beyond (PT-BR) [Dublado e Traduzido PT-BR]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/01/ps2-alone-in-dark-new-nightmare-pt-br.html" 
+                    pix="https://blogger.googleusercontent.com/img/a/AVvXsEgx9vRmnn0b0vPSTvGJz0pLD5J1YyiAp37wAiHf7E3-nvOUcNVDO-ocFty-AlVt9seJfZ1seMSANYYXixOHWso-SzQpiM2RbgoBcsziq6AMFWnxTeRhvfO9YLZEWM1FxDu8TVqSm4tttY4g3fru6tCYXE177sEfv01o8LNUqynMiN5xStU9dGlvhH-c=w400-h400" 
+                    text="[PS1] Alone in the Dark - The New Nightmare (PT-BR) [Dublado e Legendado]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/01/ps1-peter-pan-in-return-to-neverland-pt.html" 
+                    pix="https://blogger.googleusercontent.com/img/a/AVvXsEiigb4RPRkxawDvvIE2ft12lD8QBSdXym-vq5Ad1Ic08gRPwsVwYuvm1rlf9lp22lcpMxufke8_f0wge4GULGBs4RBdNB3VCxuNEdfS0-nrCkdLzKgUCBQ2YbZvUvQQKG8XkIs39rm-b8HITmrccsU1lnFwh8aV19k2COYYqDJlT3tf3-pnKMMUc8wS=w400-h378" 
+                    text="[PS1] Peter Pan in Return to Neverland (PT-BR) [Dublado e Legendado]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/04/ps2-silent-hill-2-pt-br-dublado-e.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTVMzvyUAS8Xg1ZSnAd3238zSz0n4Um7mgNfsGKNEqOisJ0UibKmyOxLXr8Mu1rJ-GHGbaO5IMz2U3a5bntM2jGhbPsoRuOCux_8MNAUsRfthavoKkgkdDiw8-XBeHuQ-4qQ4otHPRhWbzcOrFuxMrdlM-0pIPameaKpuF0Csna_qhdYfzl0FTXoH1/w283-h400/Silent%20Hill%202_%20Dublado%20e%20Legendado_Silent_fandub_ps2_traduzido_tradu%C3%A7%C3%A3o_pt-br_portugu%C3%AAs_patch_iso.jpg" 
+                    text="[PS2] Silent Hill 2 (PT-BR) [Dublado e Legendado]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/04/ps1-mummy-mumia-pt-br-traduzido.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzUOPqHHYnuGL8c7CACy2gddrsRtmKn1IkD3O51kjk2QBKtJWgwQdj7qtEk5U3XDPolbGuYnTqvgsV4vAx0iJnw9AI0dKQaMuh3x0z2RXDAbor17H_sx84FbbadEI6abEh0S3RI6oYwQhnzZWHOiPdsHMRJ883b_AoH-0x2z6MLWNmMdipsmQEJJ4b/w400-h388/cover_The%20Mummy_a_mumia__ps1_psx__portugu%C3%AAs_tradu%C3%A7%C3%A3o_traduzido_pt-br_romhack_ps2_jogo_iso_legendado.jpg" 
+                    text="[PS1] The Mummy [A Múmia] (PT-BR) [Traduzido]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/05/ps2-suffering-pt-br-traduzido.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoU0NXV9f-py-HxEF-zC9rbJH_OPJKxg8sQkMfe-gBxd0sx52jBN7Pj7pMLaJPjvM_Xe1O80aihlb2Oim-wC8wzhAZS-csmYGxrtvmX63G28brCvzsNLgxBz1MyceN0VVaLHrbnraz4ikQTOSgKUiJ9kdk0KBk9ebF_s2_xc5NWJsXdcLIGc7BuGqJ/w285-h400/cover_The%20Suffering_ps2_psx__portugu%C3%AAs_tradu%C3%A7%C3%A3o_traduzido_pt-br_BR_brasil_romhack_ps2_jogo_iso_legendado.jpg" 
+                    text="[PS2] The Suffering (PT-BR) [Traduzido]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/05/ps1-countdown-vampires-pt-br-traduzido.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxt7lzlXMz02poUkfRwCfV5alkxXNlektsCG3Cca0nH_ICQlvsxzXuyccjzZ9xIR05qi0I3M1xtHGoZWgB90_finJLGkSgfNmfUsE7WUb1CsvyNPNTJM9lK_pHSGm99TDySjizuRyNWeQhbnUekL78M-ZPLll5O-kNz_WbBJKoX-j93IyAhrBO9BpA/w400-h395/cover_Countdown%20Vampires_ps1_psx__portugu%C3%AAs_tradu%C3%A7%C3%A3o_traduzido_pt-br_romhack_ps2_jogo_iso_legendado_.jpg" 
+                    text="[PS1] Countdown Vampires (PT-BR) [Traduzido]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/05/ps1-galerians-pt-br-traduzido.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYESj5uUyfHVNn4gWWVyqPz-R4gJj5iMB0dlAGGr3vs7uVBoERJ33TiadMeupNQBXYg8WYpF3RvFaOD74BK4oHsU7xUfQf8PUKVQXxkFNVstKH7kSKEo-KWzytXzJG00wyHGrIFKSOqvWZ98ERSofkh0YMBrD8dAbfbZuw7IMGYkRxSf9QTGLYwLbq/w400-h380/cover_Galerians_ps1_psx__portugu%C3%AAs_tradu%C3%A7%C3%A3o_traduzido_pt-br_romhack_ps2_jogo_iso_legendado_psx.jpg" 
+                    text="[PS1] Galerians (PT-BR) [Traduzido]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/06/ps2-evil-dead-regeneration-morte-do.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjc24Hpcm5wCG-QqzbDuAHnGYQyjFSo30cfo3ZJjVDuqVi6ISphotUN5fZcY_XlicIgfZxG8bZxc53UJm-_gf3N0opXhnFXzz2cTT07A6aBmMmj9mjDz2hnWzqNw2Z2Uq-VqYBV_N33bnHmTN0VBwnT8xxpWp20N7pdacVxeAOOJgaIPys25ocCac1O/w280-h400/0_PS2_Cover_Evil%20Dead_Regeneration_A%20Morte%20do%20Dem%C3%B4nio_Regenera%C3%A7%C3%A3o__Traduzido_iso_bin_patch_tradu%C3%A7%C3%A3o_iso_portugu%C3%AAs_pt-br_br_legendado_dublado.jpg" 
+                    text="[PS2] Evil Dead: Regeneration (A Morte do Demônio: Regeneração) [Traduzido]"></game>
+                <game 
+                    link="https://psxstation.blogspot.com/2022/10/ps1-resident-evil-2-pt-br-dublado-e.html" 
+                    pix="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUx0QTrn6hm2l_0hWNCi0x24idwmXzBQgen-SYTWk_UxszUbLhnzACMdLrtpFs4t4kHni0737FYjXR5clZ7JDP6ikYh_Wo5_oHXU0UEPuMb8WgQVMz5-7aSNWNeXfct_wlFLznjXSaV4D5vEMOB7nWgj9sVvjCXyvJEA1elcL60KcOEx9MMwKEv5_z/s16000/RE2_resident_evil_2_claire_leon_ps1_psx_ptbe_pt-br_portugu%C3%AAs_dublado_nemesis_fandubs_traduzido_1.jpg" 
+                    text="[PS1] Resident Evil 2 (PT-BR) [Dublado e Traduzido]"></game>
+                <game 
+                    link="" 
+                    pix="" 
+                    text=""></game>
+                <game 
+                    link="" 
+                    pix="" 
+                    text=""></game>
+                <game 
+                    link="" 
+                    pix="" 
+                    text=""></game>
+                game[link][pix][text]
+            </games>
+        </main>
+
+       <script>
+           'use strict';
+           /* ==[ properties ]================= */
+           const $ = v => document.querySelector( v ),
+               $$ = v => document.querySelectorAll( v ),
+               _ = v => console.log( v );
+           /* -------------------------------- */
+
+
+
+            /* ==[ events ]==================== */
+            window.addEventListener( 'load', ev => {
+                let NavLinks = $$( 'link' ),
+                    gamesGallery = $$( "games" ),
+                    games = $$( "game" );
+
+
+
+                NavLinks.forEach( link => link.addEventListener( 'click', ev => {
+                    window.open( link.getAttribute( 'to' ), '_blank' );
+                } ) );
+
+                games.forEach( game => {
+                    let 
+                        pix = document.createElement( "img" ),
+                        text = document.createElement( "h3" );
+                    pix.setAttribute( "src", game.getAttribute( "pix" ) );
+                    text.innerText = game.getAttribute( "text" );
+                    game.append( pix );
+                    game.append( text );
+                    game.addEventListener( "click", ev => {
+                        window.open( game.getAttribute( "link" ), "_blank" );
+                    } );
+                } );
+
+            } );
+
+       </script>
+   </body>
+</html>
